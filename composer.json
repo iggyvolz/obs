@@ -1,6 +1,7 @@
 {
     "name": "iggyvolz/obs",
     "prefer-stable": true,
+    "license": "0BSD",
     "minimum-stability": "dev",
     "require": {
         "php": "8.1.*",
