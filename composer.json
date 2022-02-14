@@ -1,4 +1,5 @@
 {
+    "name": "iggyvolz/obs",
     "prefer-stable": true,
     "minimum-stability": "dev",
     "require": {
