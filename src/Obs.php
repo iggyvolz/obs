@@ -149,7 +149,7 @@ class Obs
         ));
         $this->requestCallbacks[$requestId] = function(RequestResponse $response) use($future, $responseType): void {
             if($response->requestStatus->result) {
-                $future->complete(is_null($responseType) ? null : self::decode($response->requestId, $responseType));
+                $future->complete(is_null($responseType) ? null : self::decode($response->responseData ?? [], $responseType));
             } else {
                 $future->error(ObsException::from($response->requestStatus));
             }
