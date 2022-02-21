@@ -10,20 +10,20 @@ namespace iggyvolz\obs\Responses;
 class GetSpecialInputsResponse
 {
     /**
-     * @param string $desktop1
-     * @param string $desktop2
-     * @param string $mic1
-     * @param string $mic2
-     * @param string $mic3
-     * @param string $mic4
+     * @param string|null $desktop1
+     * @param string|null $desktop2
+     * @param string|null $mic1
+     * @param string|null $mic2
+     * @param string|null $mic3
+     * @param string|null $mic4
      */
     public function __construct(
-        public readonly string $desktop1,
-        public readonly string $desktop2,
-        public readonly string $mic1,
-        public readonly string $mic2,
-        public readonly string $mic3,
-        public readonly string $mic4,
+        public readonly ?string $desktop1,
+        public readonly ?string $desktop2,
+        public readonly ?string $mic1,
+        public readonly ?string $mic2,
+        public readonly ?string $mic3,
+        public readonly ?string $mic4,
     ) {
     }
 }
