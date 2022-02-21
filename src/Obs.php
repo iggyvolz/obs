@@ -26,28 +26,19 @@ class Obs
 {
     use Obs_;
 
-    /**
-     * @var Closure(): string
-     */
-    private readonly Closure $requestIdGenerator;
-
     private ?Connection $connection = null;
 
     private const RPC_VERSION = 1;
     private readonly DeferredFuture $_connected;
     public readonly Future $connected;
 
-    /**
-     * @param null|Closure(RequestResponse):string $requestIdGenerator
-     */
     public function __construct(
         private readonly Handshake|PsrUri|string $handshake,
         private readonly ?string $authenticationPassword = null,
-        ?Closure $requestIdGenerator = null,
+        private readonly RequestIdGenerator $requestIdGenerator = new DefaultRequestIdGenerator(),
         private readonly LoggerInterface $logger = new NullLogger(),
     )
     {
-        $this->requestIdGenerator = $requestIdGenerator ?? fn() => base64_encode(random_bytes(33));
         $this->_connected = new DeferredFuture();
         $this->connected = $this->_connected->getFuture();
     }
