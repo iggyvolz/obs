@@ -109,6 +109,9 @@ enum RequestStatus: int
      */
     case ResourceNotConfigurable = 606;
 
+    /** The specified filter (obs_source_t-OBS_SOURCE_TYPE_FILTER) had the wrong kind. */
+    case InvalidFilterKind = 607;
+
     /** Creating the resource failed. */
     case ResourceCreationFailed = 700;
 

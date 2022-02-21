@@ -24,7 +24,15 @@ trait Obs_
     use Requests\SetVideoSettings;
     use Requests\GetStreamServiceSettings;
     use Requests\SetStreamServiceSettings;
+    use Requests\GetRecordDirectory;
+    use Requests\GetSourceFilterList;
+    use Requests\GetSourceFilterDefaultSettings;
+    use Requests\CreateSourceFilter;
+    use Requests\RemoveSourceFilter;
+    use Requests\SetSourceFilterName;
     use Requests\GetSourceFilter;
+    use Requests\SetSourceFilterIndex;
+    use Requests\SetSourceFilterSettings;
     use Requests\GetVersion;
     use Requests\GetStats;
     use Requests\BroadcastCustomEvent;
@@ -78,7 +86,6 @@ trait Obs_
     use Requests\ToggleRecordPause;
     use Requests\PauseRecord;
     use Requests\ResumeRecord;
-    use Requests\GetRecordDirectory;
     use Requests\GetSceneItemList;
     use Requests\GetGroupItemList;
     use Requests\GetSceneItemId;
@@ -104,6 +111,8 @@ trait Obs_
     use Requests\CreateScene;
     use Requests\RemoveScene;
     use Requests\SetSceneName;
+    use Requests\GetSceneSceneTransitionOverride;
+    use Requests\SetSceneSceneTransitionOverride;
     use Requests\GetSourceActive;
     use Requests\GetSourceScreenshot;
     use Requests\SaveSourceScreenshot;
@@ -118,7 +127,9 @@ trait Obs_
     use Requests\SetCurrentSceneTransition;
     use Requests\SetCurrentSceneTransitionDuration;
     use Requests\SetCurrentSceneTransitionSettings;
+    use Requests\GetCurrentSceneTransitionCursor;
     use Requests\TriggerStudioModeTransition;
+    use Requests\SetTBarPosition;
     use Requests\GetStudioModeEnabled;
     use Requests\SetStudioModeEnabled;
     use Requests\OpenInputPropertiesDialog;
