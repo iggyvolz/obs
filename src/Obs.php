@@ -131,8 +131,7 @@ class Obs
     private function request(array $data, string $requestType, ?string $responseType = null): Future
     {
         $future = new DeferredFuture();
-        /** @var string $requestId */
-        $requestId = ($this->requestIdGenerator)();
+        $requestId = $this->requestIdGenerator->getRequestId();
         $this->send(new Request(
             $requestType,
             $requestId,
