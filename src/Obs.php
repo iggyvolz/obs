@@ -20,6 +20,7 @@ use iggyvolz\obs\Message\RequestResponse;
 use Psr\Http\Message\UriInterface as PsrUri;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use function Amp\async;
 use function Amp\Websocket\Client\connect;
 
 class Obs
@@ -29,8 +30,8 @@ class Obs
     private ?Connection $connection = null;
 
     private const RPC_VERSION = 1;
-    private readonly DeferredFuture $_connected;
-    public readonly Future $connected;
+    private readonly DeferredFuture $connected;
+    private ?Future $runningFuture = null;
 
     public function __construct(
         private readonly Handshake|PsrUri|string $handshake,
@@ -39,8 +40,7 @@ class Obs
         private readonly LoggerInterface $logger = new NullLogger(),
     )
     {
-        $this->_connected = new DeferredFuture();
-        $this->connected = $this->_connected->getFuture();
+        $this->connected = new DeferredFuture();
     }
 
     public function run(): void
@@ -64,7 +64,7 @@ class Obs
                     if($message->negotiatedRpcVersion !== self::RPC_VERSION) {
                         throw new ObsException("Server declared unknown RPC version " . $message->negotiatedRpcVersion);
                     }
-                    $this->_connected->complete();
+                    $this->connected->complete();
                 } elseif($message instanceof Event) {
                     $callbacks = $this->eventCallbacks[$message->eventType] ?? [];
                     foreach ($callbacks as $callback) {
@@ -171,5 +171,11 @@ class Obs
         // https://github.com/obsproject/obs-websocket/blob/master/docs/generated/protocol.md#creating-an-authentication-string
         $base64Secret = base64_encode(hash("sha256", $this->authenticationPassword . $salt, true));
         return base64_encode(hash("sha256", $base64Secret . $challenge, true));
+    }
+
+    public function start(): void
+    {
+        $this->runningFuture = async($this->run(...));
+        $this->connected->getFuture()->await();
     }
 }
