@@ -10,13 +10,13 @@ namespace iggyvolz\obs\Responses;
 class GetSceneListResponse
 {
     /**
-     * @param string $currentProgramSceneName
-     * @param string $currentPreviewSceneName
+     * @param ?string $currentProgramSceneName
+     * @param ?string $currentPreviewSceneName
      * @param list<mixed> $scenes
      */
     public function __construct(
-        public readonly string $currentProgramSceneName,
-        public readonly string $currentPreviewSceneName,
+        public readonly ?string $currentProgramSceneName,
+        public readonly ?string $currentPreviewSceneName,
         public readonly array $scenes,
     ) {
     }
