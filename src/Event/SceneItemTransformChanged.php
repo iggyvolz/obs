@@ -12,12 +12,12 @@ class SceneItemTransformChanged
     /**
      * @param string $sceneName
      * @param int $sceneItemId
-     * @param mixed $sceneItemTransform
+     * @param SceneItemTransform $sceneItemTransform
      */
     public function __construct(
         public readonly string $sceneName,
         public readonly int $sceneItemId,
-        public readonly mixed $sceneItemTransform,
+        public readonly SceneItemTransform $sceneItemTransform,
     ) {
     }
 }
