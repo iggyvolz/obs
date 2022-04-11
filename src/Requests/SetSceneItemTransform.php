@@ -12,10 +12,10 @@ trait SetSceneItemTransform
     /**
      * @param string $sceneName Name of the scene the item is in
      * @param int $sceneItemId Numeric ID of the scene item
-     * @param SceneItemTransform $sceneItemTransform Object containing scene item transform info to update
+     * @param SceneItemTransformUpdate $sceneItemTransform Object containing scene item transform info to update
      * @return \Amp\Future<void>
      */
-    public function setSceneItemTransform(string $sceneName, int $sceneItemId, SceneItemTransform $sceneItemTransform): \Amp\Future
+    public function setSceneItemTransform(string $sceneName, int $sceneItemId, SceneItemTransformUpdate $sceneItemTransform): \Amp\Future
     {
         return $this->request([
             "sceneName" => $sceneName,
