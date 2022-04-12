@@ -4,8 +4,8 @@ namespace iggyvolz\obs;
 
 use Amp\DeferredFuture;
 use Amp\Future;
-use Amp\Websocket\Client\Connection;
-use Amp\Websocket\Client\Handshake;
+use Amp\Websocket\Client\WebsocketConnection;
+use Amp\Websocket\Client\WebsocketHandshake;
 use Closure;
 use CuyZ\Valinor\Mapper\Source\JsonSource;
 use CuyZ\Valinor\Mapper\TreeMapper;
@@ -26,14 +26,14 @@ class Obs
 {
     use Obs_;
 
-    private ?Connection $connection = null;
+    private ?WebsocketConnection $connection = null;
 
     private const RPC_VERSION = 1;
     private readonly DeferredFuture $_connected;
     public readonly Future $connected;
 
     public function __construct(
-        private readonly Handshake|PsrUri|string $handshake,
+        private readonly WebsocketHandshake|PsrUri|string $handshake,
         private readonly ?string $authenticationPassword = null,
         private readonly RequestIdGenerator $requestIdGenerator = new DefaultRequestIdGenerator(),
         private readonly LoggerInterface $logger = new NullLogger(),
